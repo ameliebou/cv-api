@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :resumes, only: [ :index, :create ]
       resources :resumes, only: :show do
         resources :portfolios, only: :index
+        resources :working_experiences, only: :index
       end
     end
   end
