@@ -1,6 +1,9 @@
 json.extract! @resume, :title, :description
 json.user @resume.user, :first_name, :last_name
 json.contact @resume.contact, :email, :address, :phone_number, :github, :linkedin
+json.websites @resume.contact.websites do |website|
+  json.extract! website, :title, :url
+end
 json.portfolios @resume.portfolios do |portfolio|
   json.extract! portfolio, :title, :url, :description
   json.stacks portfolio.stacks do |stack|
