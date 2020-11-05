@@ -10,10 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_095920) do
+ActiveRecord::Schema.define(version: 2020_11_05_094625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "email"
+    t.text "address"
+    t.string "phone_number"
+    t.string "github"
+    t.string "linkedin"
+    t.bigint "resume_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_contacts_on_resume_id"
+  end
+
+  create_table "educations", force: :cascade do |t|
+    t.integer "graduation_date"
+    t.string "degree"
+    t.string "institute"
+    t.text "description"
+    t.bigint "resume_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_educations_on_resume_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.string "level"
+    t.bigint "resume_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_languages_on_resume_id"
+  end
 
   create_table "portfolios", force: :cascade do |t|
     t.string "title"
@@ -34,6 +66,23 @@ ActiveRecord::Schema.define(version: 2020_10_23_095920) do
     t.index ["user_id"], name: "index_resumes_on_user_id"
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.string "level"
+    t.bigint "resume_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_skills_on_resume_id"
+  end
+
+  create_table "stacks", force: :cascade do |t|
+    t.string "name"
+    t.bigint "portfolio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["portfolio_id"], name: "index_stacks_on_portfolio_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -48,6 +97,34 @@ ActiveRecord::Schema.define(version: 2020_10_23_095920) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "websites", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.bigint "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_websites_on_contact_id"
+  end
+
+  create_table "working_experiences", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.string "title"
+    t.string "company"
+    t.text "description"
+    t.bigint "resume_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resume_id"], name: "index_working_experiences_on_resume_id"
+  end
+
+  add_foreign_key "contacts", "resumes"
+  add_foreign_key "educations", "resumes"
+  add_foreign_key "languages", "resumes"
   add_foreign_key "portfolios", "resumes"
   add_foreign_key "resumes", "users"
+  add_foreign_key "skills", "resumes"
+  add_foreign_key "stacks", "portfolios"
+  add_foreign_key "websites", "contacts"
+  add_foreign_key "working_experiences", "resumes"
 end

@@ -1,8 +1,13 @@
 class Api::V1::ResumesController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User, except: [ :index ]
+  before_action :set_resume, only: :show
 
   def index
     @resumes = policy_scope(Resume)
+  end
+
+  def show
+
   end
 
   def create
@@ -17,6 +22,11 @@ class Api::V1::ResumesController < Api::V1::BaseController
   end
 
   private
+
+  def set_resume
+    @resume = Resume.find(params[:id])
+    authorize @resume
+  end
 
   def resume_params
     params.require(:resume).permit(:title, :description)
