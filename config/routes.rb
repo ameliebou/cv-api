@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :resumes, only: :show do
         resources :portfolios, only: :index
         resources :working_experiences, only: :index
+        resources :educations, only: :index
       end
     end
   end

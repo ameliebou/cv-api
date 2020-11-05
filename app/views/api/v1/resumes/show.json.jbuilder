@@ -6,3 +6,7 @@ end
 json.working_experiences @resume.working_experiences do |working_experience|
   json.extract! working_experience, :start_date, :end_date, :title, :company, :description
 end
+json.educations @resume.educations do |education|
+  json.extract! education, :graduation_date, :degree, :institute, :description
+end
+
