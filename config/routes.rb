@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resources :educations, only: :index
         resources :contacts, only: :index
         resources :languages, only: :index
+        resources :skills, only: :index
       end
     end
   end
