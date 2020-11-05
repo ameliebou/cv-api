@@ -9,4 +9,4 @@ end
 json.educations @resume.educations do |education|
   json.extract! education, :graduation_date, :degree, :institute, :description
 end
-
+json.contact @resume.contact, :email, :address, :phone_number, :github, :linkedin
