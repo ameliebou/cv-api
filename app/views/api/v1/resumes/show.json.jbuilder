@@ -1,5 +1,6 @@
 json.extract! @resume, :title, :description
 json.user @resume.user, :first_name, :last_name
+json.contact @resume.contact, :email, :address, :phone_number, :github, :linkedin
 json.portfolios @resume.portfolios do |portfolio|
   json.extract! portfolio, :title, :url, :description
 end
@@ -9,4 +10,6 @@ end
 json.educations @resume.educations do |education|
   json.extract! education, :graduation_date, :degree, :institute, :description
 end
-json.contact @resume.contact, :email, :address, :phone_number, :github, :linkedin
+json.languages @resume.languages do |language|
+  json.extract! language, :name, :level
+end

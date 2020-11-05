@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         resources :working_experiences, only: :index
         resources :educations, only: :index
         resources :contacts, only: :index
+        resources :languages, only: :index
       end
     end
   end
