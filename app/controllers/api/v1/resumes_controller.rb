@@ -1,5 +1,5 @@
 class Api::V1::ResumesController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index ]
+  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
   before_action :set_resume, only: :show
 
   def index
@@ -7,7 +7,6 @@ class Api::V1::ResumesController < Api::V1::BaseController
   end
 
   def show
-
   end
 
   def create
