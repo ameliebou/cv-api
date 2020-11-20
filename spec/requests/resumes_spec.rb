@@ -21,4 +21,20 @@ RSpec.describe "Resumes requests", type: :request do
       expect(JSON.parse(response.body).length).to eq(2)
     end
   end
+
+  describe "GET /api/v1/resumes/:id" do
+    before do
+      resume_id = Resume.first.id
+      get "/api/v1/resumes/#{resume_id}"
+    end
+
+    it "has a 200 status" do
+      expect(response).to have_http_status(200)
+    end
+
+    it "displays one resume" do
+      expect(JSON.parse(response.body)["title"]).to eq("Full stack dev")
+    end
+  end
+
 end
